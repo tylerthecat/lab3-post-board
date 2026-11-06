@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Доска публикаций — лабораторная работа по асинхронному JavaScript и REST API">
+  <title>Доска публикаций</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Лабораторная работа № 3</p>
+        <h1>Доска публикаций</h1>
+        <p class="hero-text">Небольшой REST-клиент для загрузки и создания публикаций без перезагрузки страницы.</p>
+      </div>
+      <div class="api-badge" aria-hidden="true">
+        <span>REST</span>
+        <strong>API</strong>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="Сводная информация">
+      <article class="stat-card">
+        <span>Загружено</span>
+        <strong id="loaded-count">0</strong>
+        <small>публикаций</small>
+      </article>
+      <article class="stat-card">
+        <span>Создано</span>
+        <strong id="created-count">0</strong>
+        <small>за текущий сеанс</small>
+      </article>
+      <article class="stat-card stat-status">
+        <span>Состояние API</span>
+        <strong id="api-status" class="status-value status-idle">Ожидание</strong>
+        <small>JSONPlaceholder</small>
+      </article>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel composer" aria-labelledby="composer-title">
+        <div class="panel-heading">
+          <div>
+            <p class="section-label">Новая запись</p>
+            <h2 id="composer-title">Создать публикацию</h2>
+          </div>
+          <span class="method-chip method-post">POST</span>
+        </div>
+
+        <form id="post-form" novalidate>
+          <label>
+            <span>Заголовок</span>
+            <input id="post-title" name="title" type="text" maxlength="100" placeholder="Введите заголовок" autocomplete="off">
+          </label>
+          <label>
+            <span>Текст</span>
+            <textarea id="post-body" name="body" rows="6" maxlength="500" placeholder="Введите текст публикации"></textarea>
+          </label>
+          <button id="create-button" class="button button-primary" type="submit">
+            <span class="button-label">Создать публикацию</span>
+            <span class="button-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div id="form-message" class="message hidden" role="alert" aria-live="polite"></div>
+        <article id="created-post" class="created-post hidden" aria-live="polite">
+          <div class="created-post-topline">
+            <span>Создано</span>
+            <strong id="created-post-id"></strong>
+          </div>
+          <h3 id="created-post-title"></h3>
+          <p>Сервер принял данные. JSONPlaceholder имитирует сохранение записи.</p>
+        </article>
+      </section>
+
+      <section class="panel feed" aria-labelledby="feed-title">
+        <div class="panel-heading feed-heading">
+          <div>
+            <p class="section-label">Лента</p>
+            <h2 id="feed-title">Последние публикации</h2>
+          </div>
+          <span class="method-chip method-get">GET</span>
+        </div>
+
+        <button id="load-button" class="button button-secondary" type="button">
+          <span class="button-label">Загрузить публикации</span>
+          <span class="button-spinner" aria-hidden="true"></span>
+        </button>
+
+        <div id="load-message" class="message hidden" role="status" aria-live="polite"></div>
+        <div id="posts-list" class="posts-list"></div>
+
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon" aria-hidden="true">↻</div>
+          <h3>Лента ещё не загружена</h3>
+          <p>Нажмите кнопку выше, чтобы получить пять публикаций через REST API.</p>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <span>Тучкин Владислав · БПИ-23-РП-3</span>
+      <span>Vanilla JavaScript · Fetch API</span>
+    </footer>
+  </main>
+
+  <template id="post-template">
+    <article class="post-card">
+      <div class="post-number"></div>
+      <div class="post-content">
+        <h3 class="post-title"></h3>
+        <p class="post-body"></p>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
