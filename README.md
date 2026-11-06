@@ -66,4 +66,5 @@ JSONPlaceholder имитирует создание публикаций. Нов
 
 ## Публикация
 
-После создания публичного репозитория ссылки на GitHub и GitHub Pages следует добавить в комментарий к заданию в LMS.
+- Публичный GitHub-репозиторий: https://github.com/tylerthecat/lab3-post-board
+- Работающий сайт GitHub Pages: https://tylerthecat.github.io/lab3-post-board/
